@@ -1,27 +1,20 @@
-package com.example.day11_7.Model;
+package com.example.day11_7.DTO;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+public class DepartmentDto {
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "department")
-public class Department {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    int id;
-
-    @Column(name = "name")
+    private int id;
     private String name;
-
-    @Column(name = "description")
     private String description;
 
-    public Department() {
+    public DepartmentDto() {
     }
 
-    public Department(int id, String name, String description) {
+    public DepartmentDto(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

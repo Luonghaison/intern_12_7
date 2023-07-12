@@ -13,16 +13,40 @@ import java.util.List;
 public class EmployeeMapper implements EntityMaper<EmployeeDto, Employee> {
     @Override
     public Employee toEntity(EmployeeDto dto) {
-        return new Employee(dto.getId(),dto.getName(), dto.getEmail(),dto.getDepartment(),dto.getRoles());
+        if (dto == null) {
+            return null;
+        }
+        Employee entity = new Employee();
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setEmail(dto.getEmail());
+        entity.setDepartment(dto.getDepartment());
+        entity.setRoles(dto.getRoles());
+        entity.setDepartmentId(dto.getDepartmentId());
+        return entity;
     }
 
     @Override
     public EmployeeDto toDto(Employee entity) {
-        return new EmployeeDto(entity.getId(), entity.getName(), entity.getEmail(),entity.getDepartment(),entity.getRoles());
+        if (entity == null) {
+            return null;
+        }
+        EmployeeDto dto = new EmployeeDto();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setEmail(entity.getEmail());
+        dto.setDepartment(entity.getDepartment());
+        dto.setRoles(entity.getRoles());
+        dto.setDepartmentId(entity.getDepartmentId());
+        return dto;
     }
+
 
     @Override
     public List<Employee> toEntity(List<EmployeeDto> dtoList) {
+        if (dtoList == null) {
+            return null;
+        }
         List<Employee> entityList = new ArrayList<>();
         for (EmployeeDto dto : dtoList) {
             entityList.add(toEntity(dto));
@@ -31,6 +55,9 @@ public class EmployeeMapper implements EntityMaper<EmployeeDto, Employee> {
     }
     @Override
     public List<EmployeeDto> toDto(List<Employee> entityList) {
+        if (entityList == null) {
+            return null;
+        }
         List<EmployeeDto> dtoList = new ArrayList<>();
         for (Employee entity : entityList) {
             dtoList.add(toDto(entity));

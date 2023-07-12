@@ -20,7 +20,7 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Page<Employee> getAll(Pageable pageable, Sort sort) {
+    public Page<Employee> findAll(Pageable pageable, Sort sort) {
         pageable = PageRequest.of(pageable.getPageNumber(),5,sort);
         return employeeRepository.findAll(pageable);
     }
@@ -49,14 +49,12 @@ public class EmployeeService {
         }
         return false;
     }
+    public boolean existsByEmail(String email) {
+        return employeeRepository.existsByEmail(email);
+    }
 
     public Employee findByEmail(String email) {
-        for (Employee e : employeeRepository.findAll()) {
-            if (e.getEmail().equals(email)) {
-                return e;
-            }
-        }
-        return null;
+        return employeeRepository.findByEmail(email);
     }
-}
+    }
 

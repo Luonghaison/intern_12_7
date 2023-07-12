@@ -15,15 +15,17 @@ public class EmployeeDto {
     private String email;
     private Department department;
     private Set<Role> roles = new HashSet<>();
+    private Long departmentId;
     public EmployeeDto() {
     }
 
-    public EmployeeDto(Long id, String name, String email, Department department, Set<Role> roles) {
+    public EmployeeDto(Long id, String name, String email, Department department, Set<Role> roles, Long departmentId) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.department = department;
         this.roles = roles;
+        this.departmentId = departmentId;
     }
 
     public Long getId() {
@@ -64,5 +66,13 @@ public class EmployeeDto {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.day11_7.Model;
 
-import lombok.*;
+
 
 import javax.persistence.*;
 

@@ -21,8 +21,11 @@ public class Employee {
     private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Department department;
+
+    @Column(name = "department_id")
+    private Long department_id;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "employee_role",
@@ -30,14 +33,16 @@ public class Employee {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
 
+
     public Employee() {
     }
 
-    public Employee(Long id, String name, String email, Department department, Set<Role> roles) {
+    public Employee(Long id, String name, String email, Department department, Long department_id, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.department = department;
+        this.department_id = department_id;
         this.roles = roles;
     }
 
@@ -73,6 +78,14 @@ public class Employee {
         this.department = department;
     }
 
+    public Long getDepartmentId() {
+        return department_id;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.department_id = departmentId;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -80,6 +93,4 @@ public class Employee {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-
 }

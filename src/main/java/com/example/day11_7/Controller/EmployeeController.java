@@ -25,7 +25,7 @@ import java.util.List;
         private EmployeeMapper employeeMapper;
 
         @GetMapping("/employee")
-        public ResponseEntity<Page<EmployeeDto>> getAllEmployees(
+        public ResponseEntity<Page<EmployeeDto>> findAllEmployees(
                 @RequestParam(name = "name", required = false) String name,
                 @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC) Pageable pageable,
                 @SortDefault(sort = "id", direction = Sort.Direction.ASC) Sort sort) {
@@ -33,7 +33,7 @@ import java.util.List;
             if (name != null && !name.isEmpty()) {
                 employeePage = employeeService.findByNameContainingIgnoreCase(name, pageable);
             } else {
-                employeePage = employeeService.getAll(pageable, sort);
+                employeePage = employeeService.findAll(pageable, sort);
             }
             Page<EmployeeDto> employeeDtoPage = employeePage.map(employeeMapper::toDto);
             return ResponseEntity.ok(employeeDtoPage);
@@ -63,8 +63,10 @@ import java.util.List;
 
         @DeleteMapping("/employee/{id}")
         public ResponseEntity<?> delete(@PathVariable Long id) {
-            employeeService.deleteById(id);
-            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+            if (id == null) {
+                return new ResponseEntity<>("Nhập sai id",HttpStatus.NOT_FOUND);
+            }else { employeeService.deleteById(id);
+                return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);}
         }
 
         @GetMapping("/employee/{id}")
