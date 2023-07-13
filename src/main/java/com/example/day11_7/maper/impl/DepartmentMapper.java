@@ -1,9 +1,8 @@
-package com.example.day11_7.Maper;
+package com.example.day11_7.maper.impl;
 
-import com.example.day11_7.DTO.DepartmentDto;
-import com.example.day11_7.DTO.EmployeeDto;
-import com.example.day11_7.Model.Department;
-import com.example.day11_7.Model.Employee;
+import com.example.day11_7.dto.DepartmentDto;
+import com.example.day11_7.maper.EntityMaper;
+import com.example.day11_7.model.Department;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.List;
 
 @Component
 public class DepartmentMapper implements EntityMaper<DepartmentDto, Department> {
-
     @Override
     public Department toEntity(DepartmentDto dto) {
         if (dto == null) {
@@ -59,4 +57,5 @@ public class DepartmentMapper implements EntityMaper<DepartmentDto, Department> 
         }
         return dtoList;
     }
+
 }

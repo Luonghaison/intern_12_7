@@ -1,30 +1,26 @@
-package com.example.day11_7.DTO;
+package com.example.day11_7.dto;
 
-import com.example.day11_7.Model.Department;
-import com.example.day11_7.Model.Role;
+import com.example.day11_7.model.Department;
 
-import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
-
 public class EmployeeDto {
-
     private Long id;
     private String name;
     private String email;
     private Department department;
-    private Set<Role> roles = new HashSet<>();
+    private Set<String> role;
     private Long departmentId;
+
     public EmployeeDto() {
     }
 
-    public EmployeeDto(Long id, String name, String email, Department department, Set<Role> roles, Long departmentId) {
+    public EmployeeDto(Long id, String name, String email, Department department, Set<String> role, Long departmentId) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.department = department;
-        this.roles = roles;
+        this.role = role;
         this.departmentId = departmentId;
     }
 
@@ -60,12 +56,12 @@ public class EmployeeDto {
         this.department = department;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<String> getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Set<String> role) {
+        this.role = role;
     }
 
     public Long getDepartmentId() {
@@ -75,4 +71,5 @@ public class EmployeeDto {
     public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
+
 }

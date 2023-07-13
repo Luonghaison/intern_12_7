@@ -1,13 +1,15 @@
-package com.example.day11_7.Maper;
+package com.example.day11_7.maper.impl;
 
-import com.example.day11_7.DTO.EmployeeDto;
-import com.example.day11_7.Model.Employee;
+import com.example.day11_7.dto.EmployeeDto;
+import com.example.day11_7.maper.EntityMaper;
+import com.example.day11_7.model.Employee;
+import com.example.day11_7.model.Role;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class EmployeeMapper implements EntityMaper<EmployeeDto, Employee> {
@@ -21,7 +23,6 @@ public class EmployeeMapper implements EntityMaper<EmployeeDto, Employee> {
         entity.setName(dto.getName());
         entity.setEmail(dto.getEmail());
         entity.setDepartment(dto.getDepartment());
-        entity.setRoles(dto.getRoles());
         entity.setDepartmentId(dto.getDepartmentId());
         return entity;
     }
@@ -36,11 +37,14 @@ public class EmployeeMapper implements EntityMaper<EmployeeDto, Employee> {
         dto.setName(entity.getName());
         dto.setEmail(entity.getEmail());
         dto.setDepartment(entity.getDepartment());
-        dto.setRoles(entity.getRoles());
+        Set<String> listRole = new HashSet<>();
+        for (Role role : entity.getRoles()) {
+            listRole.add(role.getName());
+        }
+        dto.setRole(listRole);
         dto.setDepartmentId(entity.getDepartmentId());
         return dto;
     }
-
 
     @Override
     public List<Employee> toEntity(List<EmployeeDto> dtoList) {
@@ -53,6 +57,7 @@ public class EmployeeMapper implements EntityMaper<EmployeeDto, Employee> {
         }
         return entityList;
     }
+
     @Override
     public List<EmployeeDto> toDto(List<Employee> entityList) {
         if (entityList == null) {
@@ -64,4 +69,5 @@ public class EmployeeMapper implements EntityMaper<EmployeeDto, Employee> {
         }
         return dtoList;
     }
+
 }

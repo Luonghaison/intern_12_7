@@ -1,5 +1,4 @@
-package com.example.day11_7.Model;
-
+package com.example.day11_7.model;
 
 
 import javax.persistence.*;
@@ -8,14 +7,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "role")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     int id;
-
     @Column(name = "name")
     String name;
-
     @Column(name = "discription")
     String discription;
 

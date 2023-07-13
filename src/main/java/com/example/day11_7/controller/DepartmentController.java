@@ -1,13 +1,9 @@
-package com.example.day11_7.Controller;
+package com.example.day11_7.controller;
 
-import com.example.day11_7.DTO.DepartmentDto;
-import com.example.day11_7.DTO.EmployeeDto;
-import com.example.day11_7.Maper.DepartmentMapper;
-import com.example.day11_7.Maper.EmployeeMapper;
-import com.example.day11_7.Model.Department;
-import com.example.day11_7.Model.Employee;
-import com.example.day11_7.Service.DepartmentService;
-import com.example.day11_7.Service.EmployeeService;
+import com.example.day11_7.dto.DepartmentDto;
+import com.example.day11_7.maper.impl.DepartmentMapper;
+import com.example.day11_7.model.Department;
+import com.example.day11_7.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,16 +17,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class DepartmentController {
-    @Autowired
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
+    private final DepartmentMapper departmentMapper;
 
-    @Autowired
-    private DepartmentMapper departmentMapper;
+    public DepartmentController(DepartmentService departmentService, DepartmentMapper departmentMapper) {
+        this.departmentService = departmentService;
+        this.departmentMapper = departmentMapper;
+    }
 
     @GetMapping("/department")
     public ResponseEntity<Page<DepartmentDto>> findAllDepartment(
             @RequestParam(name = "name", required = false) String name,
-            @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC) Pageable pageable,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable,
             @SortDefault(sort = "id", direction = Sort.Direction.ASC) Sort sort) {
         Page<Department> departmentPage;
         if (name != null && !name.isEmpty()) {
@@ -59,8 +57,11 @@ public class DepartmentController {
     @DeleteMapping("/department/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         if (id == null) {
-            return new ResponseEntity<>("Nhập sai id",HttpStatus.NOT_FOUND);
-        }else { departmentService.deleteById(id);
-            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);}
+            return new ResponseEntity<>("Nhập sai id", HttpStatus.NOT_FOUND);
+        } else {
+            departmentService.deleteById(id);
+            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+        }
     }
+
 }

@@ -1,12 +1,6 @@
-package com.example.day11_7.DTO;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+package com.example.day11_7.dto;
 
 public class DepartmentDto {
-
     private int id;
     private String name;
     private String description;
@@ -43,4 +37,5 @@ public class DepartmentDto {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

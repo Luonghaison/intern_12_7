@@ -1,8 +1,8 @@
-package com.example.day11_7.Maper;
+package com.example.day11_7.maper;
 
 import java.util.List;
 
-public interface EntityMaper<D,E> {
+public interface EntityMaper<D, E> {
     E toEntity(D dto);
 
     D toDto(E Entity);
